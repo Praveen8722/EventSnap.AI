@@ -14,7 +14,7 @@ export default function Login() {
 
   return (
     <Box sx={{ width: 300, mx: 'auto', mt: 10 }}>
-      <Typography variant="h5" mb={2}>Login page</Typography>
+      <Typography variant="h5" mb={2}>Login</Typography>
       <form onSubmit={handleLogin}>
         <TextField label="Email" fullWidth margin="normal" />
         <TextField label="Password" type="password" fullWidth margin="normal" />
