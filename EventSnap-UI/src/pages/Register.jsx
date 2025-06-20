@@ -11,7 +11,7 @@ export default function Register() {
 
   return (
     <Box sx={{ width: 300, mx: 'auto', mt: 10 }}>
-      <Typography variant="h5" mb={2}>Register</Typography>
+      <Typography variant="h5" mb={2}>Register Page</Typography>
       <form onSubmit={handleRegister}>
         <TextField label="Email" fullWidth margin="normal" />
         <TextField label="Password" type="password" fullWidth margin="normal" />
