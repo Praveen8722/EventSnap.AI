@@ -3,6 +3,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import { useAuth } from './context/AuthContext';
+// import React from "react";
+// import Users from "./pages/Users";
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -18,5 +20,8 @@ export default function AppRoutes() {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </Router>
+    // <>
+    // {/* <Users /> */}
+    // {/* </> */}
   );
 }

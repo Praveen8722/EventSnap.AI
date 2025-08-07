@@ -1,0 +1,156 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+/* import React, { useEffect, useState } from 'react';
+import {
+  Dialog, DialogTitle, DialogContent, DialogActions,
+  Button, Typography, Box, Paper, Grid, Avatar
+} from '@mui/material';
+import { useDropzone } from 'react-dropzone';
+import * as faceapi from 'face-api.js';
+
+export default function EventDetailsDialog({ open, onClose }) {
+  const [images, setImages] = useState([]);
+  const [faceGroups, setFaceGroups] = useState([]);
+  const [showProfiles, setShowProfiles] = useState(false);
+
+  // ✅ Load models from CDN (no need for /public/models)
+  useEffect(() => {
+    const loadModels = async () => {
+      const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
+      await Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+        faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+      ]);
+    };
+    loadModels();
+  }, []);
+
+  // 📁 Dropzone setup
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    multiple: true,
+    onDrop: files => {
+      const previews = files.map(f => Object.assign(f, { preview: URL.createObjectURL(f) }));
+      setImages(prev => [...prev, ...previews]);
+    }
+  });
+
+  // 🧠 Face detection + clustering
+  const handlePeopleAndPets = async () => {
+    const allFaces = [];
+
+    for (let image of images) {
+      const img = await faceapi.fetchImage(image.preview);
+      const results = await faceapi
+        .detectAllFaces(img, new faceapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceDescriptors();
+
+      results.forEach(res => {
+        allFaces.push({
+          descriptor: res.descriptor,
+          src: image.preview,
+        });
+      });
+    }
+
+    // 👥 Clustering faces
+    const clusters = [];
+    const threshold = 0.5;
+
+    allFaces.forEach(face => {
+      let matched = false;
+      for (let cluster of clusters) {
+        const dist = faceapi.euclideanDistance(face.descriptor, cluster[0].descriptor);
+        if (dist < threshold) {
+          cluster.push(face);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) clusters.push([face]);
+    });
+
+    setFaceGroups(clusters);
+    setShowProfiles(true);
+  };
+
+  return (
+    <>
+      /* {Upload & Button Dialog} */
+      /* <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+        <DialogTitle>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="h6">Event Photos</Typography>
+            <Button onClick={handlePeopleAndPets}><strong>People and Pets</strong></Button>
+          </Box>
+        </DialogTitle>
+
+        <DialogContent dividers>
+          <Paper {...getRootProps()} sx={{ p: 2, border: '2px dashed #ccc', textAlign: 'center', bgcolor: '#f5f5f5' }}>
+            <input {...getInputProps()} />
+            <Typography>Drag & drop or click to upload images</Typography>
+          </Paper>
+
+          <Grid container spacing={1} mt={2}>
+            {images.map((file, index) => (
+              <Grid item xs={4} sm={2} key={index}>
+                <img
+                  src={file.preview}
+                  alt={`upload-${index}`}
+                  style={{
+                    width: '100%',
+                    height: '100px',
+                    objectFit: 'cover',
+                    borderRadius: 4,
+                    border: '2px solid gray'
+                  }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={onClose} variant="outlined">Close</Button>
+        </DialogActions>
+      </Dialog> */
+
+      /* {People & Pets Profiles} */
+      /* <Dialog open={showProfiles} onClose={() => setShowProfiles(false)} fullWidth maxWidth="sm">
+        <DialogTitle>Detected Face Profiles</DialogTitle>
+        <DialogContent dividers>
+          {faceGroups.length === 0 ? (
+            <Typography>No faces detected in uploaded images.</Typography>
+          ) : (
+            <Grid container spacing={2}>
+              {faceGroups.map((group, index) => (
+                <Grid item xs={12} key={index}>
+                  <Typography variant="subtitle2">Profile {index + 1}</Typography>
+                  <Box display="flex" flexWrap="wrap" gap={1} mt={1}>
+                    {group.map((face, i) => (
+                      <Avatar
+                        key={i}
+                        src={face.src}
+                        sx={{ width: 64, height: 64, border: '2px solid #666' }}
+                      />
+                    ))}
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowProfiles(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  ); */
+/* } */ 
